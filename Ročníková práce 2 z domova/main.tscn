@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://hr11xwb42lq8"]
+
+[ext_resource type="PackedScene" uid="uid://dotke750cwb6s" path="res://enemy.tscn" id="1_ywkuo"]
+[ext_resource type="PackedScene" uid="uid://ddid1w30dxqk2" path="res://player.tscn" id="2_xftxk"]
+
+[sub_resource type="Gradient" id="Gradient_njn64"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nk57h"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_utboy"]
+color_ramp = SubResource("Gradient_njn64")
+noise = SubResource("FastNoiseLite_nk57h")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahip1"]
+size = Vector2(51.5, 223.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5aqai"]
+size = Vector2(374, 52.5)
+
+[sub_resource type="Gradient" id="Gradient_gwluk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wl2vf"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qfap1"]
+normalize = false
+color_ramp = SubResource("Gradient_gwluk")
+noise = SubResource("FastNoiseLite_wl2vf")
+
+[node name="main" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(138, 31)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-27, 12)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-265.5, 30.6875)
+scale = Vector2(0.0996093, 0.438721)
+texture = SubResource("NoiseTexture2D_utboy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-265, 32)
+shape = SubResource("RectangleShape2D_ahip1")
+
+[node name="CollisionShape2D" type="StaticBody2D" parent="."]
+position = Vector2(107, 168)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D"]
+position = Vector2(-91, -32)
+shape = SubResource("RectangleShape2D_5aqai")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+position = Vector2(-85, -30)
+scale = Vector2(0.748047, 0.103027)
+texture = SubResource("NoiseTexture2D_qfap1")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_ywkuo")]
+position = Vector2(-315, -199)
+collision_layer = 3
+collision_mask = 0
+
+[node name="player" parent="." instance=ExtResource("2_xftxk")]
+position = Vector2(286, 39)
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("1_ywkuo")]
+position = Vector2(483, -167)
+collision_layer = 1
